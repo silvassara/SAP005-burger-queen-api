@@ -1,17 +1,12 @@
 const express = require('express')
 const routes = require('./server/routes/index')
+
 const app = express()
 const port = 3000
+const morgan = require('morgan');
 
-app.use('/', routes);
-
-// app.get('*', (req, res) => {
-//   res.send('Hello World!')
-// });
-
-app.get("/users/:user_id", (req, resp) => {
-  resp.send("Voce consultou o" + req.params.user_id)
-})
+app.use(morgan('dev'));
+app.use('/', routes)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
